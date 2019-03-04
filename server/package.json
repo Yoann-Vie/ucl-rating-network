@@ -1,0 +1,14 @@
+{
+  "name": "mango-react",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Yoann Vié",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^5.4.17"
+  }
+}
