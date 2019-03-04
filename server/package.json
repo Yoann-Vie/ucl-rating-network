@@ -9,6 +9,7 @@
   "author": "Yoann Vié",
   "license": "ISC",
   "dependencies": {
+    "jsonwebtoken": "^8.5.0",
     "mongoose": "^5.4.17"
   }
 }

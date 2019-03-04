@@ -1,4 +1,4 @@
-console.log('Server is running')
+const JWT_Checker = require('./middlewares/security');
 
 const MovieDetail = require('./models/movie')
 
