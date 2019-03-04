@@ -1,6 +1,7 @@
 [
     {
       "name": "Matchday 1",
+      "year": 2017,
       "matches": [
         {
           "date": "2016-09-13",
@@ -652,6 +653,7 @@
     },
     {
       "name": "Matchday 2",
+      "year": 2017,
       "matches": [
         {
           "date": "2016-09-28",
@@ -1226,6 +1228,7 @@
     },
     {
       "name": "Matchday 3",
+      "year": 2017,
       "matches": [
         {
           "date": "2016-10-19",
@@ -1834,6 +1837,7 @@
     },
     {
       "name": "Matchday 4",
+      "year": 2017,
       "matches": [
         {
           "date": "2016-11-01",
@@ -2398,6 +2402,7 @@
     },
     {
       "name": "Matchday 5",
+      "year": 2017,
       "matches": [
         {
           "date": "2016-11-23",
@@ -3004,6 +3009,7 @@
     },
     {
       "name": "Matchday 6",
+      "year": 2017,
       "matches": [
         {
           "date": "2016-12-06",
@@ -3579,6 +3585,7 @@
     },
     {
       "name": "Round of 16 - 1st Leg",
+      "year": 2017,
       "matches": [
         {
           "date": "2017-02-14",
@@ -3945,6 +3952,7 @@
     },
     {
       "name": "Round of 16 - 2nd Leg",
+      "year": 2017,
       "matches": [
         {
           "date": "2017-03-07",
@@ -4278,6 +4286,7 @@
     },
     {
       "name": "Quarter-finals - 1st Leg",
+      "year": 2017,
       "matches": [
         {
           "date": "2017-04-11",
@@ -4435,6 +4444,7 @@
     },
     {
       "name": "Quarter-finals - 2nd Leg",
+      "year": 2017,
       "matches": [
         {
           "date": "2017-04-18",
@@ -4586,6 +4596,7 @@
     },
     {
       "name": "Semi-finals - 1st Leg",
+      "year": 2017,
       "matches": [
         {
           "date": "2017-05-02",
@@ -4661,6 +4672,7 @@
     },
     {
       "name": "Semi-finals - 2nd Leg",
+      "year": 2017,
       "matches": [
         {
           "date": "2017-05-09",
@@ -4741,6 +4753,7 @@
     },
     {
       "name": "Final",
+      "year": 2017,
       "matches": [
         {
           "date": "2017-06-03",
