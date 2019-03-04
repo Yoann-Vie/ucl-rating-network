@@ -6,7 +6,8 @@ const Schema = mongoose.Schema
 
 const roundSchema = new Schema({
     name: String,
+    year: {type: Number, min: 2016, max: 2018},
     matches: [Match]
 })
 
-module.exports = db.model('2017_2018_rounds', roundSchema)
+module.exports = db.model('ucl_rounds', roundSchema)
