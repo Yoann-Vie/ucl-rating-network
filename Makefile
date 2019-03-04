@@ -1,5 +1,9 @@
-import_football_data:
+import_football:
 	echo "Importing Football Data"
+	docker-compose exec mongo mongoimport --username root --password password --authenticationDatabase admin --db football_data --collection ucl_rounds --file /usr/local/data/all/rounds.json --jsonArray
+
+import_football_old_data:
+	echo "Importing Football Data (DEPRECATED)"
 	docker-compose exec mongo mongoimport --username root --password password --authenticationDatabase admin --db football_data --collection 2017_2018_clubs --file /usr/local/data/2017-2018/clubs.json --jsonArray
 	docker-compose exec mongo mongoimport --username root --password password --authenticationDatabase admin --db football_data --collection 2017_2018_groups --file /usr/local/data/2017-2018/groups.json --jsonArray
 	docker-compose exec mongo mongoimport --username root --password password --authenticationDatabase admin --db football_data --collection 2017_2018_rounds --file /usr/local/data/2017-2018/rounds.json --jsonArray
