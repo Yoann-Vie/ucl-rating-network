@@ -1,0 +1,18 @@
+.App-header {
+    background-color: grey;
+}
+
+.card{
+    margin-left: 10%;
+}
+
+.card-title{
+    text-align: left;
+}
+
+.Domicile{
+    text-align: left; 
+}
+.Exterieur{
+    text-align: right;
+}
