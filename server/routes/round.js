@@ -6,7 +6,7 @@ router.get('/rounds', (req, res) => {
 
     Round.find(req.query)
         .then((items) => {
-            res.status(200).send(JSON.stringify(items))
+            res.status(200).send(items)
         })
         .catch((error) => console.log('Error while retrieving rounds details: ' + error))
 })

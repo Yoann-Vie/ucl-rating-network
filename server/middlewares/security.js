@@ -1,4 +1,5 @@
 const verifyJWTToken = require('../libs/auth').verifyToken;
+const User = require('../models/user')
 
 const verifyToken = (req, res, next) => {
     if(req.path === "/login_check"){
@@ -11,9 +12,11 @@ const verifyToken = (req, res, next) => {
         }
         else{
             verifyJWTToken(auth.replace('Bearer ', ''))
-                .then(decodedToken => {
-                    req.user = decodedToken;
-                    next();
+                .then(userData => {
+                    User.findOne({ username: userData.username }).then((user) => {
+                        req.user = user;
+                        next();
+                    })
                 })
                 .catch(error => res.status(400).send({
                     error: "JWT TOKEN invalid",
