@@ -1,49 +1,18 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import ToggleButton from './components/ToggleButton';
-import LoginFormContainer from './components/LoginFormContainer';
+import Home from "./components/HomeComponent";
+import { Switch, Route } from "react-router";
 
-class App extends Component {
 
-  constructor(props) {
-    super(props)
-
-    this.state ={
-      theme: "dark"
-    }
-  }
-  handleToggle = () => {
-    const newTheme = this.state.theme === 'dark' 
-    ? 'light' : 'dark';
-
-    this.setState({
-      theme: newTheme
-    });
-  }
-
+export default class App extends Component<Props> {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          <ToggleButton theme={this.state.theme} onClick={this.handleToggle}/>
-          <LoginFormContainer/>
-        </header>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/Matchs" component={Match} />
+        </Switch>
       </div>
     );
   }
 }
 
-export default App;
