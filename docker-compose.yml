@@ -13,7 +13,7 @@ services:
       - ./data:/usr/local/data
     working_dir: /usr/local/sampleCollections
 
-  mongo-express:
+  mongo-express: 
     image: mongo-express
     ports:
       - 127.0.0.1:8088:8081
@@ -36,3 +36,12 @@ services:
       - 127.0.0.1:3000:3000
     expose:
       - 3000
+
+  client:
+    build: './client'
+    volumes:
+      - './client:/home/node/app'
+    working_dir: '/home/node/app'
+    command: 'yarn start'
+    ports:
+      - 127.0.0.1:3001:3000
