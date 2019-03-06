@@ -2,8 +2,7 @@ const jwt = require('jsonwebtoken');
 
 const createToken = function(user = {}) {
     return jwt.sign({
-        firstName: user.firstName,
-        lastName: user.lastName
+        username: user.username
     }, process.env.JWT_SECRET, {
         expiresIn: 3600,
         algorithm: "HS256"

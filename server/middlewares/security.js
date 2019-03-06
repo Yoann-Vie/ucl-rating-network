@@ -5,7 +5,6 @@ const verifyToken = (req, res, next) => {
         next();
     }
     else{
-        console.log(req);
         const auth = req.get('Authorization')
         if(!auth || !auth.startsWith('Bearer')){
             res.sendStatus(401);

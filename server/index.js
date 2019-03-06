@@ -2,7 +2,6 @@ console.log('Server is running')
 const express = require('express')
 const RoundRouter = require('./routes/round')
 const SecurityRouter = require('./routes/security')
-const UserModel = require('./models/user')
 const verifyToken = require('./middlewares/security');
 const bodyparser = require('body-parser');
 const app = express()
