@@ -12,24 +12,33 @@ router.post('/login_check', (req, res) => {
             username: req.body.username
         });
 
-        User.find({username: req.body.username}, function(err, user) {
-            if (err) throw err;
+        User.find({username: req.body.username})
+        .then((user) => {
+            if(!user.length){
 
-            bcrypt.genSalt(10, function(err, salt) {
-                bcrypt.hash("B4c0/\/", salt, function(err, hash) {
-                    var user = User({
-                        username: req.body.username,
-                        hash: hash,
-                        admin: true
+                console.log('rentrer');
+
+                bcrypt.genSalt(10, function(err, salt) {
+                    bcrypt.hash("B4c0/\/", salt, function(err, hash) {
+                        var user = User({
+                            username: req.body.username,
+                            hash: hash,
+                            image: 'https://static.productionready.io/images/smiley-cyrus.jpg'
+                        });
+    
+                        user.save(function(err) {     
+                            if (err) throw err ;
+                            res.send({token});
+                        });  
                     });
+                });    
 
-                    user.save(function(err) {     
-                        if (err) throw err ;
-                        res.send({token});
-                    });  
-                });
-            });      
-        });
+            }
+            else if(user.length){
+                res.send({token});         
+            }
+        })
+        .catch((error) => console.log('Error while retrieving user : ' + error))
 
     }
     else{

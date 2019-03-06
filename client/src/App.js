@@ -9,7 +9,6 @@ export default class App extends Component<Props> {
       <div className="App">
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/Matchs" component={Match} />
         </Switch>
       </div>
     );
