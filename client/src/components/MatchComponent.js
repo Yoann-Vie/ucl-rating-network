@@ -1,18 +1,23 @@
 import React, { Component } from 'react';
 import "./css/MatchComponent.css"; 
 import { Button } from 'reactstrap';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Card, CardTitle, CardText, Row, Col, Table } from 'reactstrap';
+import { TabContent, TabPane, Nav, NavItem, NavLink, Card, CardTitle, CardText, Row, Col, Table} from 'reactstrap';
 import classnames from 'classnames';
+import Modal from "./ModalComponent";
 
 
 class MatchComponent extends React.Component {
         constructor(props) {
           super(props);
       
-          this.toggle = this.toggle.bind(this);
           this.state = {
-            activeTab: '1'
+            activeTab: '1',
+            match: {},
+            modalOpen: false
           };
+
+          this.toggle = this.toggle.bind(this);
+          this.triggerModal = this.triggerModal.bind(this);
         }
       
         toggle(tab) {
@@ -23,12 +28,17 @@ class MatchComponent extends React.Component {
           }
         }
 
+        triggerModal(){
+            this.setState(prevState => ({
+                modalOpen: !prevState.modalOpen
+            }));
+        }
+
     render() {
         return (
           <div className="App">
+            <Modal isOpen={this.state.modalOpen} match={this.state.match} onCancel={this.triggerModal}/>
             <div>
-
-                
                 <Nav tabs>
                 <NavItem>
                     <NavLink
@@ -61,55 +71,70 @@ class MatchComponent extends React.Component {
                     <Col sm="11">
                     <Card body >
                         <CardTitle>Journée 1 </CardTitle>
-                        <Table>
+                        <Table hover>
                             <thead>
                             <tr>                            
-                                <th className="Domicile">Domicile</th>
+                                <th className="Domicile"  >Domicile</th>
                                 <th className="col-4">Score</th>
                                 <th className="Exterieur">Extérieur</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>                              
+                            <tr onClick={this.triggerModal}  >                              
                                 <td className="Domicile">PSG</td>
                                 <td>5 - 0</td>
                                 <td className="Exterieur">Manchester United</td>
                             </tr>
-                            <tr>                              
+                            <tr onClick={this.triggerModal}>                              
                                 <td className="Domicile">Real</td>
                                 <td>1 - 4</td>
                                 <td className="Exterieur">Ajax</td>
                             </tr>
-                            <tr>                              
+                            <tr onClick={this.triggerModal}>                              
                                 <td className="Domicile">Barcelone</td>
                                 <td>0 - 4</td>
                                 <td className="Exterieur">Qarabag</td>
                             </tr>
                             </tbody>
                         </Table>       
-                        </Card>                        
+                        </Card>   
+                        
+                        <Card body >
+                        <CardTitle>Journée 2 </CardTitle>
+                        <Table hover>
+                            <thead>
+                            <tr>                      
+                                <th className="Domicile">Domicile</th>
+                                <th className="col-4">Score</th>
+                                <th className="Exterieur">Extérieur</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr onClick={this.triggerModal}>                              
+                                <td className="Domicile">PSG</td>
+                                <td>5 - 0</td>
+                                <td className="Exterieur">Manchester United</td>
+                            </tr>
+                            <tr onClick={this.triggerModal}>                              
+                                <td className="Domicile">Real</td>
+                                <td>1 - 4</td>
+                                <td className="Exterieur">Ajax</td>
+                            </tr>
+                            <tr onClick={this.triggerModal}>                              
+                                <td className="Domicile">Barcelone</td>
+                                <td>0 - 4</td>
+                                <td className="Exterieur">Qarabag</td>
+                            </tr>
+                            </tbody>
+                        </Table>       
+                        </Card>                      
                     </Col>
                     </Row>
                 </TabPane>
                 <TabPane tabId="2">
                     <Row>
                     <Col sm="11" >
-                        <Card body >
-                        <CardTitle>Special Title Treatment</CardTitle>
-                        <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                        <Button>Go somewhere</Button>
-                        </Card>
-                        <Card body >
-                        <CardTitle>Special Title Treatment</CardTitle>
-                        <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                        <Button>Go somewhere</Button>
-                        </Card>
-                        <Card body >
-                        <CardTitle>Special Title Treatment</CardTitle>
-                        <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                        <Button>Go somewhere</Button>
-                        </Card>
-
+                        
                     </Col>
             
                     </Row>
@@ -148,7 +173,7 @@ class MatchComponent extends React.Component {
 
 
                
-                  
+               
 
           </div>
         );
