@@ -1,5 +1,6 @@
 import React from "react";
 import LoginForm from "../components/LoginComponent";
+import fetchData from "../functions/fetchFunction";
 
 class LoginFormContainer extends React.Component {
 
@@ -9,26 +10,7 @@ class LoginFormContainer extends React.Component {
     }
 
     handleSubmit = () => {
-        fetch('http://127.0.0.1:3000/login_check', {
-            method: "POST",
-            mode: "cors",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(this.state)
-        }).then((response) => response.json())
-        .then(
-            data => localStorage.setItem("token", data.token)
-        )
-        .then(
-            localStorage.setItem('isLogged', 1)
-        )
-        .then(
-            setTimeout(function(){ 
-                window.location.reload() 
-            }, 1500)
-        )
-        .catch(error => console.log(error));
+        fetchData("POST", "login_check", null, this.state)
     }
 
     handleChange = (value,field) => {

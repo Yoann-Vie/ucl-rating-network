@@ -9,6 +9,7 @@ const app = express()
 const RoundRouter = require('./routes/round')
 const RatingRouter = require('./routes/ratings')
 const CommentRouter = require('./routes/comments')
+const UserRouter = require('./routes/user')
 
 app.use(cors());
 app.use(bodyparser.json());
@@ -16,6 +17,7 @@ app.use(verifyToken);
 app.use(RoundRouter)
 app.use(RatingRouter)
 app.use(CommentRouter)
+app.use(UserRouter)
 app.use('/', SecurityRouter)
 app.listen(3000, () => console.log('Express is listening'))
 
