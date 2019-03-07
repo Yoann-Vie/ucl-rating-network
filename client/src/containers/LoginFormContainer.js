@@ -24,7 +24,9 @@ class LoginFormContainer extends React.Component {
             localStorage.setItem('isLogged', 1)
         )
         .then(
-            window.location.reload()
+            setTimeout(function(){ 
+                window.location.reload() 
+            }, 1500)
         )
         .catch(error => console.log(error));
     }
