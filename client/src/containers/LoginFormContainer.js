@@ -1,5 +1,5 @@
 import React from "react";
-import LoginForm from "../components/LoginForm";
+import LoginForm from "../components/LoginComponent";
 
 class LoginFormContainer extends React.Component {
 
@@ -9,7 +9,6 @@ class LoginFormContainer extends React.Component {
     }
 
     handleSubmit = () => {
-        console.log(this.state);
         fetch('http://127.0.0.1:3000/login_check', {
             method: "POST",
             mode: "cors",
@@ -18,7 +17,15 @@ class LoginFormContainer extends React.Component {
             },
             body: JSON.stringify(this.state)
         }).then((response) => response.json())
-        .then(data => localStorage.setItem("token", data.token))
+        .then(
+            data => localStorage.setItem("token", data.token)
+        )
+        .then(
+            localStorage.setItem('isLogged', 1)
+        )
+        .then(
+            window.location.reload()
+        )
         .catch(error => console.log(error));
     }
 
