@@ -51,9 +51,10 @@ class MatchComponent extends React.Component {
       }
     }
 
-    triggerModal(){
+    triggerModal(match){
         this.setState(prevState => ({
-            modalOpen: !prevState.modalOpen
+            modalOpen: !prevState.modalOpen,
+            match: match
         }));
     }
 
@@ -63,7 +64,7 @@ class MatchComponent extends React.Component {
             if (typeof round.matches !== 'undefined' && round.matches.length > 0) {
                 matches = round.matches.map((match) => {
                     return (
-                        <tr onClick={ this.triggerModal }  >
+                        <tr onClick={ () => this.triggerModal(match) }  >
                             <td className="Domicile">{ match.team1.name }</td>
                             <td>{ match.score1 } - { match.score2 }</td>
                             <td className="Exterieur">{ match.team2.name }</td>
