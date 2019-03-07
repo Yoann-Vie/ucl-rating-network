@@ -58,22 +58,28 @@ class Home extends Component {
     render() {
 
         if(this.state.isLogged === true){
-            var content = <p>
-                {this.state.loggedName}
-                <Button onClick={this.toggleOff} color="primary">Logout</Button>
-            </p>
+            var content = <div className="loginP">      
+                <div className="displayInlineBlock">
+                    <Button onClick={this.toggleOff} color="primary">Logout</Button>
+                </div>        
+                <div className="profileTop displayInlineBlock">
+                    <p>{this.state.loggedName}</p>
+                    <img src="https://static.productionready.io/images/smiley-cyrus.jpg" alt="profilePic" className="profilePic"/>
+                </div>
+            </div>
+            
         }
         else{
-            var content = <Button color="primary" onClick={this.toggle} >Login</Button>
+            var content = <Button color="primary" onClick={this.toggle} className="loginBtn">Login</Button>
         }
 
         return (
             <div className="header container">
                 <div className="row">
-                    <div className="col-8">
+                    <div className="col-7">
                         <img src="/images/logos/logo.png" className="logo" alt="logo" />
                     </div>
-                    <div className="col-4">
+                    <div className="col-5">
                         {content}
                     </div>
                 </div>
