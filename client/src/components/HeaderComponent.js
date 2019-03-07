@@ -14,10 +14,8 @@ class Home extends Component {
         };
     
         this.toggle = this.toggle.bind(this);
+        this.toggleOff = this.toggleOff.bind(this);
 
-        if(localStorage.getItem('token')){
-            console.log(this.parseJwt(localStorage.getItem('token')).username);
-        }
     }
 
     parseJwt (token) {
@@ -48,13 +46,25 @@ class Home extends Component {
         }));
     }
 
+    toggleOff() {    
+        this.setState({
+            loggedName: "",
+            isLogged: false
+        })
+        this.forceUpdate()
+        localStorage.clear()
+    }
+
     render() {
 
         if(this.state.isLogged === true){
-            var content = <p>{this.state.loggedName}</p>
+            var content = <p>
+                {this.state.loggedName}
+                <Button onClick={this.toggleOff} color="primary">Logout</Button>
+            </p>
         }
         else{
-            var content = <Button color="danger" onClick={this.toggle} />
+            var content = <Button color="primary" onClick={this.toggle} >Login</Button>
         }
 
         return (
