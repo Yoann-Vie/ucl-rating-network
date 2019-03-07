@@ -65,9 +65,15 @@ class MatchComponent extends React.Component {
                 matches = round.matches.map((match) => {
                     return (
                         <tr onClick={ () => this.triggerModal(match) }  >
-                            <td className="Domicile">{ match.team1.name }</td>
+                            <td className="Domicile">
+                                <img className={'team-picto'} src={'/images/logos/' + match.team1.key + '.png' } alt={match.team1.name + ' logo'}/>
+                                { match.team1.name }
+                            </td>
                             <td>{ match.score1 } - { match.score2 }</td>
-                            <td className="Exterieur">{ match.team2.name }</td>
+                            <td className="Exterieur">
+                                { match.team2.name }
+                                <img className={'team-picto'} src={'/images/logos/' + match.team2.key + '.png' } alt={match.team2.name + ' logo'}/>
+                            </td>
                         </tr>
                     )
                 })
