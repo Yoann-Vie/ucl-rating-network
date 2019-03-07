@@ -7,7 +7,7 @@ class FormComponent extends React.Component {
     return (
       <Form>      
         <FormGroup>
-          <Label for="form_rating">Select</Label>
+          <Label for="form_rating">Notation :</Label>
           <Input type="select" name="select" id="form_rating">
             <option>1</option>
             <option>2</option>
