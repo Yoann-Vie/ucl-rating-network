@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import "./css/MatchComponent.css"; 
 import { Button } from 'reactstrap';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Card, CardTitle, CardText, Row, Col, Table} from 'reactstrap';
@@ -7,174 +7,133 @@ import Modal from "./ModalComponent";
 
 
 class MatchComponent extends React.Component {
-        constructor(props) {
-          super(props);
-      
-          this.state = {
-            activeTab: '1',
-            match: {},
-            modalOpen: false
-          };
+    constructor(props) {
+      super(props);
 
-          this.toggle = this.toggle.bind(this);
-          this.triggerModal = this.triggerModal.bind(this);
-        }
-      
-        toggle(tab) {
-          if (this.state.activeTab !== tab) {
+      this.state = {
+        activeTab: '2018',
+        match: {},
+        rounds: [],
+        modalOpen: false
+      };
+
+      this.toggle = this.toggle.bind(this);
+      this.triggerModal = this.triggerModal.bind(this);
+    }
+
+    componentDidMount() {
+        this.refreshRounds()
+    }
+
+    refreshRounds(year = '2018') {
+        fetch('http://127.0.0.1:3000/rounds?year=' + year, {
+            method: "GET",
+            mode: "cors",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem('token')
+            },
+        })
+        .then((response) => response.json())
+        .then((data) => {
             this.setState({
-              activeTab: tab
-            });
-          }
-        }
+                rounds: data
+            })
+        })
+    }
 
-        triggerModal(){
-            this.setState(prevState => ({
-                modalOpen: !prevState.modalOpen
-            }));
-        }
+    toggle(tab) {
+      if (this.state.activeTab !== tab) {
+        this.setState({
+          activeTab: tab
+        });
+        this.refreshRounds(tab)
+      }
+    }
+
+    triggerModal(match){
+        this.setState(prevState => ({
+            modalOpen: !prevState.modalOpen,
+            match: match
+        }));
+    }
 
     render() {
+        let rounds = this.state.rounds.map((round) => {
+            let matches = ''
+            if (typeof round.matches !== 'undefined' && round.matches.length > 0) {
+                matches = round.matches.map((match) => {
+                    return (
+                        <tr onClick={ () => this.triggerModal(match) }  >
+                            <td className="Domicile">{ match.team1.name }</td>
+                            <td>{ match.score1 } - { match.score2 }</td>
+                            <td className="Exterieur">{ match.team2.name }</td>
+                        </tr>
+                    )
+                })
+            }
+
+            return (
+                <div>
+                    <Row>
+                        <Col sm="11">
+                            <Card body >
+                                <CardTitle>{ round.name }</CardTitle>
+                                <Table hover>
+                                    <thead>
+                                        <tr>
+                                            <th className="Domicile">Domicile</th>
+                                            <th className="col-4">Score</th>
+                                            <th className="Exterieur">Extérieur</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        { matches }
+                                    </tbody>
+                                </Table>
+                            </Card>
+                        </Col>
+                    </Row>
+                </div>
+            )
+        })
+
         return (
           <div className="App">
             <Modal isOpen={this.state.modalOpen} match={this.state.match} onCancel={this.triggerModal}/>
             <div>
                 <Nav tabs>
-                <NavItem>
-                    <NavLink
-                    className={classnames({ active: this.state.activeTab === '1' })}
-                    onClick={() => { this.toggle('1'); }}
-                    >
-                    Saisons 2015-2016
-                    </NavLink>
-                </NavItem>
-                <NavItem>
-                    <NavLink
-                    className={classnames({ active: this.state.activeTab === '2' })}
-                    onClick={() => { this.toggle('2'); }}
-                    >
-                    Saisons 2016-2017
-                    </NavLink>
-                </NavItem>
-                <NavItem>
-                    <NavLink
-                    className={classnames({ active: this.state.activeTab === '3' })}
-                    onClick={() => { this.toggle('3'); }}
-                    >
-                    Saisons 2017-2018
-                    </NavLink>
-                </NavItem>
+                    <NavItem>
+                        <NavLink
+                        className={classnames({ active: this.state.activeTab === '2018' })}
+                        onClick={() => { this.toggle('2018'); }}
+                        >
+                        Saisons 2017-2018
+                        </NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink
+                        className={classnames({ active: this.state.activeTab === '2017' })}
+                        onClick={() => { this.toggle('2017'); }}
+                        >
+                        Saisons 2016-2017
+                        </NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink
+                        className={classnames({ active: this.state.activeTab === '2016' })}
+                        onClick={() => { this.toggle('2016'); }}
+                        >
+                        Saisons 2015-2016
+                        </NavLink>
+                    </NavItem>
                 </Nav>
                 <TabContent activeTab={this.state.activeTab}>
-                <TabPane tabId="1">
-                    <Row>
-                    <Col sm="11">
-                    <Card body >
-                        <CardTitle>Journée 1 </CardTitle>
-                        <Table hover>
-                            <thead>
-                            <tr>                            
-                                <th className="Domicile"  >Domicile</th>
-                                <th className="col-4">Score</th>
-                                <th className="Exterieur">Extérieur</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr onClick={this.triggerModal}  >                              
-                                <td className="Domicile">PSG</td>
-                                <td>5 - 0</td>
-                                <td className="Exterieur">Manchester United</td>
-                            </tr>
-                            <tr onClick={this.triggerModal}>                              
-                                <td className="Domicile">Real</td>
-                                <td>1 - 4</td>
-                                <td className="Exterieur">Ajax</td>
-                            </tr>
-                            <tr onClick={this.triggerModal}>                              
-                                <td className="Domicile">Barcelone</td>
-                                <td>0 - 4</td>
-                                <td className="Exterieur">Qarabag</td>
-                            </tr>
-                            </tbody>
-                        </Table>       
-                        </Card>   
-                        
-                        <Card body >
-                        <CardTitle>Journée 2 </CardTitle>
-                        <Table hover>
-                            <thead>
-                            <tr>                      
-                                <th className="Domicile">Domicile</th>
-                                <th className="col-4">Score</th>
-                                <th className="Exterieur">Extérieur</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr onClick={this.triggerModal}>                              
-                                <td className="Domicile">PSG</td>
-                                <td>5 - 0</td>
-                                <td className="Exterieur">Manchester United</td>
-                            </tr>
-                            <tr onClick={this.triggerModal}>                              
-                                <td className="Domicile">Real</td>
-                                <td>1 - 4</td>
-                                <td className="Exterieur">Ajax</td>
-                            </tr>
-                            <tr onClick={this.triggerModal}>                              
-                                <td className="Domicile">Barcelone</td>
-                                <td>0 - 4</td>
-                                <td className="Exterieur">Qarabag</td>
-                            </tr>
-                            </tbody>
-                        </Table>       
-                        </Card>                      
-                    </Col>
-                    </Row>
-                </TabPane>
-                <TabPane tabId="2">
-                    <Row>
-                    <Col sm="11" >
-                        
-                    </Col>
-            
-                    </Row>
-                </TabPane>
-
-                <TabPane tabId="3">
-                    <Row>
-                    <Col sm="11" >
-                        <Card body >
-                        <CardTitle>Special Title Treatment</CardTitle>
-                        <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                        <Button>Go somewhere</Button>
-                        </Card>
-                        <Card body >
-                        <CardTitle>Special Title Treatment</CardTitle>
-                        <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                        <Button>Go somewhere</Button>
-                        </Card>
-                        <Card body >
-                        <CardTitle>Special Title Treatment</CardTitle>
-                        <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                        <Button>Go somewhere</Button>
-                        </Card>
-                        
-                    </Col>
-            
-                    </Row>
-                </TabPane>
+                    <TabPane tabId="2018">{ rounds }</TabPane>
+                    <TabPane tabId="2017">{ rounds }</TabPane>
+                    <TabPane tabId="2016">{ rounds }</TabPane>
                 </TabContent>
             </div>
-
-
-  
-            
-
-
-
-               
-               
-
           </div>
         );
       }
