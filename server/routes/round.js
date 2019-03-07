@@ -4,7 +4,7 @@ const Round = require('../models/round')
 
 router.get('/rounds', (req, res) => {
 
-    Round.find(req.query)
+    Round.find(req.query).sort({ 'matches.date': -1 })
         .then((items) => {
             res.status(200).send(items)
         })

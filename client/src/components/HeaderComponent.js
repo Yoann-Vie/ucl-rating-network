@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './css/HeaderComponent.css';
 import LoginFormContainer from '../containers/LoginFormContainer';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import fetchData from "../functions/fetchFunction";
 
 class Home extends Component {
 
@@ -10,14 +11,12 @@ class Home extends Component {
         this.state = {
           modal: false,
           isLogged: false,
-          loggedName: ""
+          loggedName: "",
+          pictureUrl: ""
         };
     
         this.toggle = this.toggle.bind(this);
-
-        if(localStorage.getItem('token')){
-            console.log(this.parseJwt(localStorage.getItem('token')).username);
-        }
+        this.toggleOff = this.toggleOff.bind(this);
     }
 
     parseJwt (token) {
@@ -35,11 +34,18 @@ class Home extends Component {
 
         if(localStorage.getItem('token')){
             var username = this.parseJwt(localStorage.getItem('token')).username;
-
             this.setState({
-                loggedName: username
+                loggedName: username,
+            })
+            
+            fetchData("GET", "user/" + username, localStorage.getItem('token'))
+            .then((res) => {
+                this.setState({
+                    pictureUrl: res.image
+                })
             })
         }
+
     }
 
     toggle() {
@@ -48,22 +54,40 @@ class Home extends Component {
         }));
     }
 
+    toggleOff() {    
+        this.setState({
+            loggedName: "",
+            isLogged: false
+        })
+        this.forceUpdate()
+        localStorage.clear()
+    }
+
     render() {
 
         if(this.state.isLogged === true){
-            var content = <p>{this.state.loggedName}</p>
+            var content = <div className="loginP">      
+                <div className="displayInlineBlock">
+                    <Button onClick={this.toggleOff} color="primary">Logout</Button>
+                </div>        
+                <div className="profileTop displayInlineBlock">
+                    <p>{this.state.loggedName}</p>
+                    <img src={this.state.pictureUrl} alt="profilePic" className="profilePic"/>
+                </div>
+            </div>
+            
         }
         else{
-            var content = <Button color="danger" onClick={this.toggle} />
+            var content = <Button color="primary" onClick={this.toggle} className="loginBtn">Login</Button>
         }
 
         return (
             <div className="header container">
                 <div className="row">
-                    <div className="col-8">
+                    <div className="col-7">
                         <img src="/images/logos/logo.png" className="logo" alt="logo" />
                     </div>
-                    <div className="col-4">
+                    <div className="col-5">
                         {content}
                     </div>
                 </div>

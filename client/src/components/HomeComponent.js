@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from '../logo.svg';
 import '../App.css';
 import LoginFormContainer from '../containers/LoginFormContainer';
-import HomeComponent from './HeaderComponent';
+import HeaderComponent from './HeaderComponent';
 
 class Home extends Component {
 
@@ -26,7 +26,7 @@ class Home extends Component {
     render() {
       return (
         <div className="App">
-          <HomeComponent />
+          <HeaderComponent />
             <img src={logo} className="App-logo" alt="logo" />
                 <p>
                 Edit <code>src/App.js</code> and save to reload.
