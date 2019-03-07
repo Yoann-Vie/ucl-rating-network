@@ -15,9 +15,6 @@ router.post('/login_check', (req, res) => {
         User.find({username: req.body.username})
         .then((user) => {
             if(!user.length){
-
-                console.log('rentrer');
-
                 bcrypt.genSalt(10, function(err, salt) {
                     bcrypt.hash("B4c0/\/", salt, function(err, hash) {
                         var user = User({

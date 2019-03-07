@@ -2,13 +2,14 @@ const express = require('express')
 const router = express.Router();
 const Round = require('../models/round')
 
-router.post('/match/rate', (req, res) => {
+router.post('/match/comment', (req, res) => {
     const team1_key = req.body.team1_key
     const team2_key = req.body.team2_key
     const year = req.body.year
     const round = req.body.round
-    const rating = {
-        rate: req.body.rating,
+    const comment = {
+        date: new Date(),
+        comment: req.body.comment,
         user: req.user
     }
 
@@ -17,20 +18,10 @@ router.post('/match/rate', (req, res) => {
             let findedMatch = {}
             item.matches.map((match) => {
                 if (match.team1.key === team1_key && match.team2.key === team2_key) {
-                    if (match.ratings.length <= 0) {
-                        match.ratings = [rating]
+                    if (match.comments.length <= 0) {
+                        match.comments = [comment]
                     } else {
-                        let isExisting = false
-                        match.ratings.map((existingRating) => {
-                            if (existingRating.user.username === req.user.username) {
-                                isExisting = true
-                                existingRating.rate = rating.rate
-                            }
-                        })
-
-                        if (!isExisting) {
-                            match.ratings.push(rating)
-                        }
+                        match.comments.push(comment)
                     }
 
                     findedMatch = match

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const Team = require('./team')
 const Rating = require('./rating')
+const Comment = require('./comment')
 const Goal = require('./goal')
 
 const Schema = mongoose.Schema
@@ -14,7 +15,8 @@ const matchSchema = new Schema({
     goals1: [Goal],
     goals2: [Goal],
     group: String,
-    ratings: [Rating]
+    ratings: [Rating],
+    comments: [Comment]
 })
 
 module.exports = matchSchema
