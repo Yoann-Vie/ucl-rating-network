@@ -16,3 +16,15 @@
 .Exterieur{
     text-align: right;
 }
+
+.games{
+    margin-top: 80px;
+}
+
+.nav-tabs{
+    margin-left: 10%;
+}
+
+.card-body {
+    margin-top: 20px;
+}

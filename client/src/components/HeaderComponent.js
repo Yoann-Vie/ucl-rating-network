@@ -3,6 +3,7 @@ import './css/HeaderComponent.css';
 import LoginFormContainer from '../containers/LoginFormContainer';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import fetchData from "../functions/fetchFunction";
+import { Link } from 'react-router-dom';
 
 class Home extends Component {
 
@@ -66,29 +67,34 @@ class Home extends Component {
     render() {
 
         if(this.state.isLogged === true){
-            var content = <div className="loginP">      
+            var content = <div className="displayInlineBlock loginP">
                 <div className="displayInlineBlock">
                     <Button onClick={this.toggleOff} color="primary">Logout</Button>
                 </div>        
                 <div className="profileTop displayInlineBlock">
                     <p>{this.state.loggedName}</p>
                     <img src={this.state.pictureUrl} alt="profilePic" className="profilePic"/>
-                </div>
+                </div> 
             </div>
-            
         }
         else{
             var content = <Button color="primary" onClick={this.toggle} className="loginBtn">Login</Button>
+
         }
 
         return (
             <div className="header container">
-                <div className="row">
-                    <div className="col-7">
+                <div className="row" style={{maxHeight: "100%"}}>
+                    <div className="col-7" style={{maxHeight: "100%"}}>
                         <img src="/images/logos/logo.png" className="logo" alt="logo" />
                     </div>
-                    <div className="col-5">
+                    <div className="col-5" style={{maxHeight: "100%"}}>
                         {content}
+                        <div className="displayInlineBlock">
+                            <Button color="warning">
+                                <Link to="/Matchs">See Matches</Link>
+                            </Button>  
+                        </div>  
                     </div>
                 </div>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
