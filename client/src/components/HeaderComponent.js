@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './css/HeaderComponent.css';
 import LoginFormContainer from '../containers/LoginFormContainer';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Button, Modal, ModalBody } from 'reactstrap';
 import fetchData from "../functions/fetchFunction";
 import { Link } from 'react-router-dom';
 
@@ -66,8 +66,10 @@ class Home extends Component {
 
     render() {
 
+        var content = "";
+
         if(this.state.isLogged === true){
-            var content = <div className="displayInlineBlock loginP">
+            content = <div className="displayInlineBlock loginP">
                 <div className="displayInlineBlock">
                     <Button onClick={this.toggleOff} color="primary">Logout</Button>
                 </div>        
@@ -78,7 +80,7 @@ class Home extends Component {
             </div>
         }
         else{
-            var content = <Button color="primary" onClick={this.toggle} className="loginBtn">Login</Button>
+            content = <Button color="primary" onClick={this.toggle} className="loginBtn">Login</Button>
 
         }
 

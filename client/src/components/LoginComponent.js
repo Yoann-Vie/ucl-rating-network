@@ -1,15 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import "./css/MatchComponent.css"; 
-import { Button } from 'reactstrap';
-import { InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
-import classnames from 'classnames';
+import { InputGroup, InputGroupAddon, Input } from 'reactstrap';
 
 
 class LoginComponent extends React.Component {
-        constructor(props) {
-          super(props);
-
-        }
       
         render() {
             return <form onSubmit={

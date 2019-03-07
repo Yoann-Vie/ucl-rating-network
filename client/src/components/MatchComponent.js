@@ -1,7 +1,6 @@
 import React from 'react';
 import "./css/MatchComponent.css"; 
-import { Button } from 'reactstrap';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Card, CardTitle, CardText, Row, Col, Table} from 'reactstrap';
+import { TabContent, TabPane, Nav, NavItem, NavLink, Card, CardTitle, Row, Col, Table} from 'reactstrap';
 import classnames from 'classnames';
 import Modal from "./ModalComponent";
 import HeaderComponent from './HeaderComponent';
