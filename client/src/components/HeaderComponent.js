@@ -40,7 +40,6 @@ class Home extends Component {
                 loggedName: username
             })
         }
-
     }
 
     toggle() {
@@ -70,7 +69,7 @@ class Home extends Component {
                 </div>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                     <ModalBody>
-                        <LoginFormContainer/>
+                        <LoginFormContainer />
                     </ModalBody>
                 </Modal>
             </div>

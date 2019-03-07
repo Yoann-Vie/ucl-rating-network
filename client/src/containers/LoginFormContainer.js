@@ -23,6 +23,9 @@ class LoginFormContainer extends React.Component {
         .then(
             localStorage.setItem('isLogged', 1)
         )
+        .then(
+            window.location.reload()
+        )
         .catch(error => console.log(error));
     }
 
