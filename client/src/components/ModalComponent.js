@@ -31,8 +31,8 @@ class ModalForm extends React.Component {
 
           comments = this.props.match.comments.map((comment) => {
             return (
-              <div>
-                <img className={'photoprofil'} src={ comment.user.image  } alt="Photo profil"/> {comment.user.username} - {comment.comment} - { new Date(comment.date).toLocaleDateString("fr-FR") }
+              <div className="row commentaire">
+                <img className={'photoprofil'} src={ comment.user.image  } alt="Photo profil"/> <div className="username col-1">{comment.user.username}</div> <div className="comment col-8">{comment.comment}</div> <div className="date col-1">{ new Date(comment.date).toLocaleDateString("fr-FR") }</div>
               </div>  
             )
           })
@@ -40,16 +40,16 @@ class ModalForm extends React.Component {
         modalBody = <ModalBody>
             
            <div className="main container"> 
-                <div className="row" style={{textAlign: "center"}}>
-                    <div className="col-4">
+                <div className="row main">
+                    <div className="col-4 dom">
                         { goals1 } 
                     </div>
                     
-                    <div className="col-4">
+                    <div className="col-4 score">
                         { this.props.match.score1 } - { this.props.match.score2 }
                     </div> 
                     
-                    <div className="col-4">
+                    <div className="col-4 ext">
                         { goals2 } 
                     </div>
                 </div>
@@ -66,7 +66,7 @@ class ModalForm extends React.Component {
     }
 
     return (
-        <Modal isOpen={this.props.isOpen} className={this.props.className}>
+        <Modal size="lg" isOpen={this.props.isOpen} className={this.props.className}>
           { modalHeader }
           { modalBody }
           <ModalFooter>

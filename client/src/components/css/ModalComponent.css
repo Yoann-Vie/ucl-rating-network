@@ -1,24 +1,61 @@
 .photoprofil{
-    width: 10%;
-    padding: 2%;
+    width: 6%;
+    padding: 1%;
+    height: 4%;
+    border-radius: 15px;
 }
 
 .main{
     width:100%;
+    margin-bottom: 10%;
   }
 
 .dom{
-
-
+    text-align: left;
+    font-style: italic;
 }
 
 .ext{
-
+    text-align: right;
+    font-style: italic;
 
 }
 
 .score{
-
-
+    text-align: center;
+    font-size: 300%;
+    font-weight: bold;
 }
+
+.username{
+    text-align: left;
+    margin-top: 25px;
+    font-style: oblique;
+    font-size: small;
+    margin-left: -10px;
+}
+
+.comment{
+    text-align: left;
+    margin-top: 25px;
+    font-style: oblique;
+    font-size: small;
+    overflow: hidden;
+  
+}
+
+.date{
+    text-align: left;
+    margin-top: 25px;
+    font-style: oblique;
+    font-size: small;
+    
+}
+
+.commentaire{
+    padding: 1%;
+}
+
+
+
 
