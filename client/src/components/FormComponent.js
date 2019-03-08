@@ -10,6 +10,8 @@ class FormComponent extends React.Component {
         this.state = {
             comment: ''
         };
+
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     handleSubmit = (event) => {
@@ -20,7 +22,8 @@ class FormComponent extends React.Component {
             "year": this.props.year,
             "round": this.props.round,
             "comment": this.state.comment
-        }).then(() => {
+        }).then((updatedMatch) => {
+            this.props.updateModalMatch(updatedMatch)
             this.setState({
                 comment: ''
             })
