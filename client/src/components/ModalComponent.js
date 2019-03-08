@@ -12,19 +12,20 @@ class ModalForm extends React.Component {
     let goals2= ''
     let comments = ''
 
+    let alt = "Profile pic."
   
     if (typeof this.props.match.team1 !== 'undefined') {
         goals1 = this.props.match.goals1.map((goal) => {
           return (
             <div>
-                <img className={'ballon'} src="/images/ballonFoot.png" alt="Photo profil"/> {goal.name} - {goal.minute + "'" }
+                <img className={'ballon'} src="/images/ballonFoot.png" alt={alt}/> {goal.name} - {goal.minute + "'" }
             </div>  
           )
         })
         goals2 = this.props.match.goals2.map((goal) => {
             return (
               <div>
-                 <img className={'ballon'} src="/images/ballonFoot.png" alt="Photo profil"/> {goal.name} - {goal.minute + "'" } 
+                 <img className={'ballon'} src="/images/ballonFoot.png" alt={alt}/> {goal.name} - {goal.minute + "'" } 
               </div>  
             )
           })
@@ -32,7 +33,7 @@ class ModalForm extends React.Component {
           comments = this.props.match.comments.map((comment) => {
             return (
               <div className="row commentaire">
-                <img className={'photoprofil'} src={ comment.user.image  } alt="Photo profil"/> <div className="username col-1">{comment.user.username}</div> <div className="comment col-8">{comment.comment}</div> <div className="date col-1">{ new Date(comment.date).toLocaleDateString("fr-FR") }</div>
+                <img className={'photoprofil'} src={ comment.user.image  } alt={alt}/> <div className="username col-1">{comment.user.username}</div> <div className="comment col-8">{comment.comment}</div> <div className="date col-1">{ new Date(comment.date).toLocaleDateString("fr-FR") }</div>
               </div>  
             )
           })
