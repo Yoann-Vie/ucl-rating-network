@@ -3,12 +3,9 @@ import "./css/MatchComponent.css";
 import { TabContent, TabPane, Nav, NavItem, NavLink, Card, CardTitle, Row, Col, Table} from 'reactstrap';
 import classnames from 'classnames';
 import Modal from "./ModalComponent";
-<<<<<<< HEAD
 import Form from "./FormComponent";
-=======
 import HeaderComponent from './HeaderComponent';
 
->>>>>>> master
 
 class MatchComponent extends React.Component {
     constructor(props) {

@@ -1,5 +1,7 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import "./css/FormComponent.css"; 
+
 
 
 class FormComponent extends React.Component {
@@ -25,7 +27,7 @@ class FormComponent extends React.Component {
           <Label for="form_comment">Commentaires</Label>
           <Input type="textarea" name="text" id="form_comment" />
         </FormGroup>
-        <Button>Submit</Button>
+        <Button className="submit">Submit</Button>
       </Form>
     );
   }
