@@ -129,8 +129,14 @@ class ModalForm extends React.Component {
                 </div>
             </div>
             <div className={'rate'}>
-                <div>Global : <strong>8</strong></div>
-                <div>My rate : { userRate }</div>
+                <div className="row">
+                    <div className="col-10">
+                    <div> <img className={'star'} src="/images/star.png" /> Global : <strong>8</strong></div>
+                    </div>
+                    <div className="col-2">
+                    <div> <img className={'star'} src="/images/star.png" /> My rate : { userRate }</div>
+                    </div>
+                </div>
             </div>
             <Form match={this.state.match} round={this.props.round} year={this.props.year} updateModalMatch={this.updateModalMatch}/>
              { comments }
@@ -142,7 +148,7 @@ class ModalForm extends React.Component {
           { modalHeader }
           { modalBody }
           <ModalFooter>
-            <Button color="secondary" onClick={this.props.onCancel}>Cancel</Button>
+            <Button color="danger" onClick={this.props.onCancel}>Cancel</Button>
           </ModalFooter>
         </Modal>
     );

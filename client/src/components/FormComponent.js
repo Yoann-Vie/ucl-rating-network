@@ -72,19 +72,35 @@ class FormComponent extends React.Component {
             <div>
                 <Form onSubmit={this.handleSubmitRate}>
                     <FormGroup>
+                        <br/>
                         <Label for="form_rating">Notation :</Label>
+                        <hr></hr>
+                        <div className="row">
+                        <div className="col-10">
                         <Input type="select" name="select" id="form_rating" onChange={(event) => this.handleChangeRate(event.currentTarget.value)}>
                             { options }
-                        </Input>
+                        </Input> 
+                        </div>
+                        <div className="col-1">
+                    <Button color="primary" className="submit">Rate</Button>
+                    </div>
+                    </div>
                     </FormGroup>
-                    <Button className="submit">Rate</Button>
                 </Form>
+                
                 <Form onSubmit={this.handleSubmitComment}>
                     <FormGroup>
-                        <Label for="form_comment">Commentaires</Label>
-                        <Input value={this.state.comment} type="textarea" name="text" id="form_comment" onChange={(event) => this.handleChangeComment(event.currentTarget.value)} />
+                        <Label for="form_comment">Commentaires :</Label>
+                        <hr></hr>
+                        <div className="row">
+                        <div className="col-10">
+                        <Input value={this.state.comment} type="textarea" name="text" id="form_comment" onChange={(event) => this.handleChangeComment(event.currentTarget.value)} />          
+                        </div>
+                        <div className="col-1">
+                        <Button color="success" className="submit">Post</Button>
+                        </div>
+                    </div>
                     </FormGroup>
-                    <Button className="submit">Post</Button>
                 </Form>
             </div>
         );
