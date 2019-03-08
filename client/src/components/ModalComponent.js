@@ -34,13 +34,23 @@ class ModalForm extends React.Component {
     let goals2= ''
     let comments = ''
     let color = ''
-    let og = ""
-    let brc = ""
-    let p = ""
-
+    let og = ''
+    let brc = ''
+    let p = ''
+    let userRate = ''
     let alt = "Profile pic."
 
-      if (typeof this.state.match.team1 !== 'undefined') {
+    if (typeof this.state.match.team1 !== 'undefined') {
+        if (localStorage.getItem('token')) {
+            userRate = this.state.match.ratings.map((rate) => {
+                let user = localStorage.getItem('token').split('.')[1].replace('-', '+').replace('_', '/');
+                user = JSON.parse(window.atob(user));
+                if (rate.user.username === user.username.toLowerCase()) {
+                    return <strong>{ rate.rate }</strong>
+                }
+            })
+        }
+
         goals1 = this.state.match.goals1.map((goal, key) => {
             if (goal.owngoal) {
                 color = "orange"
@@ -93,14 +103,13 @@ class ModalForm extends React.Component {
               </div>  
             )
           })
-
-          comments = this.state.match.comments.map((comment, key) => {
+        comments = this.state.match.comments.map((comment, key) => {
             return (
               <div key={key}>
                 <img className={'photoprofil'} src={ comment.user.image  } alt="Photo profil"/> {comment.user.username} - {comment.comment} - { new Date(comment.date).toLocaleDateString("fr-FR") }
-              </div>  
+              </div>
             )
-          })
+        })
         modalHeader = <ModalHeader>{ this.state.match.team1.name } - { this.state.match.team2.name } - { new Date(this.state.match.date).toLocaleDateString("fr-FR") }</ModalHeader>
         modalBody = <ModalBody>
            <div className="main container"> 
@@ -115,6 +124,10 @@ class ModalForm extends React.Component {
                         { goals2 } 
                     </div>
                 </div>
+            </div>
+            <div className={'rate'}>
+                <div>Global : <strong>8</strong></div>
+                <div>My rate : { userRate }</div>
             </div>
             <Form match={this.state.match} round={this.props.round} year={this.props.year} updateModalMatch={this.updateModalMatch}/>
              { comments }
