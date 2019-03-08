@@ -4,7 +4,7 @@ const createToken = function(user = {}) {
     return jwt.sign({
         username: user.username
     }, process.env.JWT_SECRET, {
-        expiresIn: 3600,
+        expiresIn: "7d",
         algorithm: "HS256"
     })
 }
