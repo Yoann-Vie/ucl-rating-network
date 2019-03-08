@@ -1,10 +1,14 @@
 import React from 'react';
 import "./css/MatchComponent.css"; 
-import { Button } from 'reactstrap';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Card, CardTitle, CardText, Row, Col, Table} from 'reactstrap';
+import { TabContent, TabPane, Nav, NavItem, NavLink, Card, CardTitle, Row, Col, Table} from 'reactstrap';
 import classnames from 'classnames';
 import Modal from "./ModalComponent";
+<<<<<<< HEAD
 import Form from "./FormComponent";
+=======
+import HeaderComponent from './HeaderComponent';
+
+>>>>>>> master
 
 class MatchComponent extends React.Component {
     constructor(props) {
@@ -65,9 +69,15 @@ class MatchComponent extends React.Component {
                 matches = round.matches.map((match) => {
                     return (
                         <tr onClick={ () => this.triggerModal(match) }  >
-                            <td className="Domicile">{ match.team1.name }</td>
+                            <td className="Domicile">
+                                <img className={'team-picto'} src={'/images/logos/' + match.team1.key + '.png' } alt={match.team1.name + ' logo'}/>
+                                { match.team1.name }
+                            </td>
                             <td>{ match.score1 } - { match.score2 }</td>
-                            <td className="Exterieur">{ match.team2.name }</td>
+                            <td className="Exterieur">
+                                { match.team2.name }
+                                <img className={'team-picto'} src={'/images/logos/' + match.team2.key + '.png' } alt={match.team2.name + ' logo'}/>
+                            </td>
                         </tr>
                     )
                 })
@@ -99,42 +109,43 @@ class MatchComponent extends React.Component {
         })
 
         return (
-          <div className="App">
-            <Modal isOpen={this.state.modalOpen} match={this.state.match} onCancel={this.triggerModal}/>
-            <div>
-                <Nav tabs>
-                    <NavItem>
-                        <NavLink
-                        className={classnames({ active: this.state.activeTab === '2018' })}
-                        onClick={() => { this.toggle('2018'); }}
-                        >
-                        Saisons 2017-2018
-                        </NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink
-                        className={classnames({ active: this.state.activeTab === '2017' })}
-                        onClick={() => { this.toggle('2017'); }}
-                        >
-                        Saisons 2016-2017
-                        </NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink
-                        className={classnames({ active: this.state.activeTab === '2016' })}
-                        onClick={() => { this.toggle('2016'); }}
-                        >
-                        Saisons 2015-2016
-                        </NavLink>
-                    </NavItem>
-                </Nav>
-                <TabContent activeTab={this.state.activeTab}>
-                    <TabPane tabId="2018">{ rounds }</TabPane>
-                    <TabPane tabId="2017">{ rounds }</TabPane>
-                    <TabPane tabId="2016">{ rounds }</TabPane>
-                </TabContent>
+            <div className="App">
+                <HeaderComponent />
+                <Modal isOpen={this.state.modalOpen} match={this.state.match} onCancel={this.triggerModal}/>
+                <div className="games">
+                    <Nav tabs>
+                        <NavItem>
+                            <NavLink
+                            className={classnames({ active: this.state.activeTab === '2018' })}
+                            onClick={() => { this.toggle('2018'); }}
+                            >
+                            Saisons 2017-2018
+                            </NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink
+                            className={classnames({ active: this.state.activeTab === '2017' })}
+                            onClick={() => { this.toggle('2017'); }}
+                            >
+                            Saisons 2016-2017
+                            </NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink
+                            className={classnames({ active: this.state.activeTab === '2016' })}
+                            onClick={() => { this.toggle('2016'); }}
+                            >
+                            Saisons 2015-2016
+                            </NavLink>
+                        </NavItem>
+                    </Nav>
+                    <TabContent activeTab={this.state.activeTab}>
+                        <TabPane tabId="2018">{ rounds }</TabPane>
+                        <TabPane tabId="2017">{ rounds }</TabPane>
+                        <TabPane tabId="2016">{ rounds }</TabPane>
+                    </TabContent>
+                </div>     
             </div>
-          </div>
         );
       }
 
