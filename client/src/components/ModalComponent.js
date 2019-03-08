@@ -11,58 +11,48 @@ class ModalForm extends React.Component {
     let goals1= ''
     let goals2= ''
     let comments = ''
-
   
     if (typeof this.props.match.team1 !== 'undefined') {
-        goals1 = this.props.match.goals1.map((goal) => {
+        goals1 = this.props.match.goals1.map((goal, key) => {
           return (
-            <div>
+            <div key={key}>
                 <img className={'ballon'} src="/images/ballonFoot.png" alt="Photo profil"/> {goal.name} - {goal.minute + "'" }
             </div>  
           )
         })
-        goals2 = this.props.match.goals2.map((goal) => {
+        goals2 = this.props.match.goals2.map((goal, key) => {
             return (
-              <div>
+              <div key={key}>
                  <img className={'ballon'} src="/images/ballonFoot.png" alt="Photo profil"/> {goal.name} - {goal.minute + "'" } 
               </div>  
             )
-          })
+        })
 
-          comments = this.props.match.comments.map((comment) => {
+        comments = this.props.match.comments.map((comment, key) => {
             return (
-              <div>
+              <div key={key}>
                 <img className={'photoprofil'} src={ comment.user.image  } alt="Photo profil"/> {comment.user.username} - {comment.comment} - { new Date(comment.date).toLocaleDateString("fr-FR") }
-              </div>  
+              </div>
             )
-          })
+        })
         modalHeader = <ModalHeader>{ this.props.match.team1.name } - { this.props.match.team2.name } - { new Date(this.props.match.date).toLocaleDateString("fr-FR") }</ModalHeader>
         modalBody = <ModalBody>
-            
            <div className="main container"> 
                 <div className="row" style={{textAlign: "center"}}>
                     <div className="col-4">
                         { goals1 } 
                     </div>
-                    
                     <div className="col-4">
                         { this.props.match.score1 } - { this.props.match.score2 }
-                    </div> 
-                    
+                    </div>
                     <div className="col-4">
                         { goals2 } 
                     </div>
                 </div>
             </div>
-           
-            <Form/>
-
-             { comments }
-            
-            
+            <Form match={this.props.match} round={this.props.round} year={this.props.year}/>
+            { comments }
         </ModalBody>
-         
-        
     }
 
     return (

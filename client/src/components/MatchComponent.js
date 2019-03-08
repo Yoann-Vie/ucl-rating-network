@@ -14,6 +14,7 @@ class MatchComponent extends React.Component {
       this.state = {
         activeTab: '2018',
         match: {},
+        round: {},
         rounds: [],
         modalOpen: false
       };
@@ -45,20 +46,21 @@ class MatchComponent extends React.Component {
       }
     }
 
-    triggerModal(match){
+    triggerModal(match, round){
         this.setState(prevState => ({
             modalOpen: !prevState.modalOpen,
-            match: match
+            match: match,
+            round: round
         }));
     }
 
     render() {
-        let rounds = this.state.rounds.map((round) => {
+        let rounds = this.state.rounds.map((round, key) => {
             let matches = ''
             if (typeof round.matches !== 'undefined' && round.matches.length > 0) {
-                matches = round.matches.map((match) => {
+                matches = round.matches.map((match, key) => {
                     return (
-                        <tr onClick={ () => this.triggerModal(match) } >
+                        <tr onClick={ () => this.triggerModal(match, round.name) } key={key}>
                             <td className="Domicile">
                                 <img className={'team-picto'} src={'/images/logos/' + match.team1.key + '.png' } alt={match.team1.name + ' logo'}/>
                                 { match.team1.name }
@@ -74,26 +76,24 @@ class MatchComponent extends React.Component {
             }
 
             return (
-                <div>
-
-                        <Col sm="11">
-                            <Card body >
-                                <CardTitle>{ round.name }</CardTitle>
-                                <Table hover>
-                                    <thead>
-                                        <tr>
-                                            <th className="Domicile">Domicile</th>
-                                            <th className="col-4">Score</th>
-                                            <th className="Exterieur">Extérieur</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        { matches }
-                                    </tbody>
-                                </Table>
-                            </Card>
-                        </Col>
-
+                <div key={key}>
+                    <Col sm="11">
+                        <Card body >
+                            <CardTitle>{ round.name }</CardTitle>
+                            <Table hover>
+                                <thead>
+                                    <tr>
+                                        <th className="Domicile">Domicile</th>
+                                        <th className="col-4">Score</th>
+                                        <th className="Exterieur">Extérieur</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    { matches }
+                                </tbody>
+                            </Table>
+                        </Card>
+                    </Col>
                 </div>
             )
         })
@@ -101,7 +101,12 @@ class MatchComponent extends React.Component {
         return (
             <div className="App">
                 <HeaderComponent />
-                <Modal isOpen={this.state.modalOpen} match={this.state.match} onCancel={this.triggerModal}/>
+                <Modal isOpen={this.state.modalOpen}
+                       match={this.state.match}
+                       year={this.state.activeTab}
+                       round={this.state.round}
+                       onCancel={this.triggerModal}
+                />
                 <div className="games">
                     <Nav tabs>
                         <NavItem>
