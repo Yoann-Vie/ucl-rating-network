@@ -58,7 +58,7 @@ class MatchComponent extends React.Component {
             if (typeof round.matches !== 'undefined' && round.matches.length > 0) {
                 matches = round.matches.map((match) => {
                     return (
-                        <tr onClick={ () => this.triggerModal(match) } >
+                        <tr onClick={ () => this.triggerModal(match) }>
                             <td className="Domicile">
                                 <img className={'team-picto'} src={'/images/logos/' + match.team1.key + '.png' } alt={match.team1.name + ' logo'}/>
                                 { match.team1.name }
@@ -82,9 +82,9 @@ class MatchComponent extends React.Component {
                                 <Table hover>
                                     <thead>
                                         <tr>
-                                            <th className="Domicile">Domicile</th>
+                                            <th className="Domicile col-4">Domicile</th>
                                             <th className="col-4">Score</th>
-                                            <th className="Exterieur">Extérieur</th>
+                                            <th className="Exterieur col-4">Extérieur</th>
                                         </tr>
                                     </thead>
                                     <tbody>
