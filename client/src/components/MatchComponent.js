@@ -4,6 +4,7 @@ import { TabContent, TabPane, Nav, NavItem, NavLink, Card, CardTitle, Row, Col, 
 import classnames from 'classnames';
 import Modal from "./ModalComponent";
 import HeaderComponent from './HeaderComponent';
+import fetchData from "../functions/fetchFunction";
 
 
 class MatchComponent extends React.Component {
@@ -26,15 +27,8 @@ class MatchComponent extends React.Component {
     }
 
     refreshRounds(year = '2018') {
-        fetch('http://127.0.0.1:3000/rounds?year=' + year, {
-            method: "GET",
-            mode: "cors",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem('token')
-            },
-        })
-        .then((response) => response.json())
+
+        fetchData("GET", "rounds?year=" + year, localStorage.getItem('token'))
         .then((data) => {
             this.setState({
                 rounds: data
