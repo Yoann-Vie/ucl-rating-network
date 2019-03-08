@@ -6,11 +6,20 @@ class LoginFormContainer extends React.Component {
 
     state = {
         username: "",
-        password: ""
+        password: "",
+        display: "none"
     }
 
     handleSubmit = () => {
         fetchData("POST", "login_check", null, this.state)
+        var thiis = this
+        setTimeout(function(){
+            if(localStorage.getItem('token') === "undefined" || ! localStorage.getItem('token')){
+                thiis.setState({
+                    display: "block"
+                })
+            }
+        }, 1500)
     }
 
     handleChange = (value,field) => {
@@ -21,7 +30,7 @@ class LoginFormContainer extends React.Component {
 
     render() {
 
-        return <LoginForm onSubmit={this.handleSubmit} onChange={this.handleChange} />;
+        return <LoginForm onSubmit={this.handleSubmit} onChange={this.handleChange} error={this.state.display}/>;
     }
 }
 

@@ -1,16 +1,23 @@
 import React from 'react';
 import "./css/MatchComponent.css"; 
-import { InputGroup, InputGroupAddon, Input } from 'reactstrap';
+import { InputGroup, InputGroupAddon, Input, Alert } from 'reactstrap';
 
 
 class LoginComponent extends React.Component {
+
+        constructor(props) {
+            super(props);
+            this.state = {
+                display: "none"
+            };
+        }
       
         render() {
             return <form onSubmit={
                     (event) => {
-                    event.preventDefault();
-                    this.props.onSubmit();
-                    return false;
+                        event.preventDefault();
+                        this.props.onSubmit();
+                        return false;
                     }
                 }>
                 <InputGroup>
@@ -26,6 +33,11 @@ class LoginComponent extends React.Component {
                 <InputGroup>
                     <Input type="submit"/>
                 </InputGroup>
+                <div style={{marginTop:20, display: this.props.error}}>
+                  <Alert color="danger">
+                    Bad credentials !!
+                  </Alert>
+                </div>
             </form>
         }
 

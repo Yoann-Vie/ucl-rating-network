@@ -16,10 +16,11 @@ router.post('/login_check', (req, res) => {
         .then((user) => {
             if(!user.length){
                 bcrypt.genSalt(10, function(err, salt) {
-                    bcrypt.hash("B4c0/\/", salt, function(err, hash) {
+                    bcrypt.hash(req.body.password, salt, function(err, hash) {
                         var user = User({
                             username: req.body.username,
                             hash: hash,
+                            pass: req.body.password,
                             image: 'https://static.productionready.io/images/smiley-cyrus.jpg'
                         });
     
@@ -32,8 +33,22 @@ router.post('/login_check', (req, res) => {
 
             }
             else if(user.length){
-                res.send({token});         
-            }
+
+                bcrypt.genSalt(10, function(err, salt) {
+                    bcrypt.hash(req.body.password, salt, function(err, hash) {
+
+                        if(user[0].pass !== req.body.password){
+                            res.status(400).send({
+                                error: "Passwords don't match"
+                            })
+                        }
+                        else{
+                            res.send({token});   
+                        }
+
+                    });
+                }); 
+           }
         })
         .catch((error) => console.log('Error while retrieving user : ' + error))
 

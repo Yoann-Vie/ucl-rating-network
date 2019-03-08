@@ -9,7 +9,8 @@ const userSchema = new Schema({
     index: true
   },
   image: String,
-  hash: String
+  hash: String,
+  pass: String
 })
 
 var User = mongoose.model('User', userSchema);

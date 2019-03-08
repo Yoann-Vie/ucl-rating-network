@@ -4,6 +4,7 @@ import { TabContent, TabPane, Nav, NavItem, NavLink, Card, CardTitle, Row, Col, 
 import classnames from 'classnames';
 import Modal from "./ModalComponent";
 import HeaderComponent from './HeaderComponent';
+import fetchData from "../functions/fetchFunction";
 
 
 class MatchComponent extends React.Component {
@@ -26,15 +27,8 @@ class MatchComponent extends React.Component {
     }
 
     refreshRounds(year = '2018') {
-        fetch('http://127.0.0.1:3000/rounds?year=' + year, {
-            method: "GET",
-            mode: "cors",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem('token')
-            },
-        })
-        .then((response) => response.json())
+
+        fetchData("GET", "rounds?year=" + year, localStorage.getItem('token'))
         .then((data) => {
             this.setState({
                 rounds: data
@@ -64,7 +58,7 @@ class MatchComponent extends React.Component {
             if (typeof round.matches !== 'undefined' && round.matches.length > 0) {
                 matches = round.matches.map((match) => {
                     return (
-                        <tr onClick={ () => this.triggerModal(match) }  >
+                        <tr onClick={ () => this.triggerModal(match) } >
                             <td className="Domicile">
                                 <img className={'team-picto'} src={'/images/logos/' + match.team1.key + '.png' } alt={match.team1.name + ' logo'}/>
                                 { match.team1.name }
