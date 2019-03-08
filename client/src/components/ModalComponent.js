@@ -105,22 +105,25 @@ class ModalForm extends React.Component {
           })
         comments = this.state.match.comments.map((comment, key) => {
             return (
-              <div key={key}>
-                <img className={'photoprofil'} src={ comment.user.image  } alt="Photo profil"/> {comment.user.username} - {comment.comment} - { new Date(comment.date).toLocaleDateString("fr-FR") }
+              <div key={key} className={'row commentaire'}>
+                  <img className={'photoprofil'} src={ comment.user.image  } alt="Photo profil"/>
+                  <div className="username col-2" >{comment.user.username}</div>
+                  <div className="comment col-8" >{comment.comment}</div>
+                  <div className="date col-1" >{ new Date(comment.date).toLocaleDateString("fr-FR") }</div>
               </div>
             )
         })
         modalHeader = <ModalHeader>{ this.state.match.team1.name } - { this.state.match.team2.name } - { new Date(this.state.match.date).toLocaleDateString("fr-FR") }</ModalHeader>
         modalBody = <ModalBody>
            <div className="main container"> 
-                <div className="row" style={{textAlign: "center"}}>
-                    <div className="col-4">
+                <div className="main row" style={{textAlign: "center"}}>
+                    <div className="col-4 dom">
                         { goals1 } 
                     </div>
-                    <div className="col-4">
+                    <div className="col-4 score">
                         { this.state.match.score1 } - { this.state.match.score2 }
                     </div>
-                    <div className="col-4">
+                    <div className="col-4 ext">
                         { goals2 } 
                     </div>
                 </div>

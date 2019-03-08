@@ -29,7 +29,7 @@
 
 .username{
     text-align: left;
-    margin-top: 25px;
+    margin-top: 12px;
     font-style: oblique;
     font-size: small;
     margin-left: -10px;
@@ -37,7 +37,7 @@
 
 .comment{
     text-align: left;
-    margin-top: 25px;
+    margin-top: 12px;
     font-style: oblique;
     font-size: small;
     overflow: hidden;
@@ -46,7 +46,7 @@
 
 .date{
     text-align: left;
-    margin-top: 25px;
+    margin-top: 12px;
     font-style: oblique;
     font-size: small;
     
