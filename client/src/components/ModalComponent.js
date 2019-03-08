@@ -8,24 +8,69 @@ class ModalForm extends React.Component {
   render() {
     let modalHeader = ''
     let modalBody = ''
-    let goals1= ''
-    let goals2= ''
+    let goals1 = ''
+    let goals2 = ''
     let comments = ''
+    let color = ''
+    let og = ""
+    let brc = ""
+    let p = ""
 
     let alt = "Profile pic."
   
     if (typeof this.props.match.team1 !== 'undefined') {
         goals1 = this.props.match.goals1.map((goal) => {
+
+          if (goal.owngoal) { 
+            color = "orange" 
+            p = ""
+            og = "(OG)"
+            brc = color
+          }
+          else if (goal.penalty) { 
+            color = "black" 
+            og = ""
+            p = "(P)"
+            brc = ""
+          }
+          else { 
+            color = "black" 
+            p = ""
+            og = ""
+            brc = ""
+          }
+
+
           return (
             <div>
-                <img className={'ballon'} src="/images/ballonFoot.png" alt={alt}/> {goal.name} - {goal.minute + "'" }
+                <img className={'ballon'} src="/images/ballonFoot.png" alt={alt} style={{borderRadius: 10, backgroundColor: brc}}/> <span style={{color: color}}>{goal.name} - {goal.minute + "'" } <span style={{fontWeight: "bold"}}>{p}</span>{og}</span>
             </div>  
           )
         })
         goals2 = this.props.match.goals2.map((goal) => {
+
+          if (goal.owngoal) { 
+            color = "orange" 
+            p = ""
+            og = "(OG)"
+            brc = color
+          }
+          else if (goal.penalty) { 
+            color = "black" 
+            og = ""
+            p = "(P)"
+            brc = ""
+          }
+          else { 
+            color = "black" 
+            p = ""
+            og = ""
+            brc = ""
+          }
+
             return (
               <div>
-                 <img className={'ballon'} src="/images/ballonFoot.png" alt={alt}/> {goal.name} - {goal.minute + "'" } 
+                 <img className={'ballon'} src="/images/ballonFoot.png" alt={alt} style={{borderRadius: 10, backgroundColor: brc}}/> <span style={{color: color}}>{goal.name} - {goal.minute + "'" } <span style={{fontWeight: "bold"}}>{p}</span>{og}</span>
               </div>  
             )
           })
