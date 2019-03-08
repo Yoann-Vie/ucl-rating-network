@@ -21,11 +21,18 @@ function fetchData(method, url, token = null, state = null){
         .then(
             localStorage.setItem('isLogged', 1)
         )
-        .then(
+        .then((
             setTimeout(function(){ 
-                window.location.reload() 
+
+                if(localStorage.getItem('token') !== "undefined"){
+                    window.location.reload() 
+                }
+                else{
+                    localStorage.clear()
+                    return false
+                }
             }, 1500)
-        )
+        ))
         .catch(error => console.log(error));
     }
     else{

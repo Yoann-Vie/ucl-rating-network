@@ -64,7 +64,7 @@ class MatchComponent extends React.Component {
             if (typeof round.matches !== 'undefined' && round.matches.length > 0) {
                 matches = round.matches.map((match) => {
                     return (
-                        <tr onClick={ () => this.triggerModal(match) }  >
+                        <tr onClick={ () => this.triggerModal(match) } >
                             <td className="Domicile">
                                 <img className={'team-picto'} src={'/images/logos/' + match.team1.key + '.png' } alt={match.team1.name + ' logo'}/>
                                 { match.team1.name }
