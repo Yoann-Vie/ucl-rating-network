@@ -75,7 +75,7 @@ class MatchComponent extends React.Component {
 
             return (
                 <div>
-                    <Row>
+
                         <Col sm="11">
                             <Card body >
                                 <CardTitle>{ round.name }</CardTitle>
@@ -93,7 +93,7 @@ class MatchComponent extends React.Component {
                                 </Table>
                             </Card>
                         </Col>
-                    </Row>
+
                 </div>
             )
         })
