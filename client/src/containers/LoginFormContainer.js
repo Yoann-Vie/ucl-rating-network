@@ -12,17 +12,17 @@ class LoginFormContainer extends React.Component {
 
     handleSubmit = () => {
         fetchData("POST", "login_check", null, this.state)
-        var thiis = this
+        let self = this
         setTimeout(function(){
             if(localStorage.getItem('token') === "undefined" || ! localStorage.getItem('token')){
-                thiis.setState({
+                self.setState({
                     display: "block"
                 })
             }
         }, 1500)
     }
 
-    handleChange = (value,field) => {
+    handleChange = (value, field) => {
         this.setState({
             [field]: value
         });

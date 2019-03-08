@@ -4,12 +4,34 @@ import Form from "./FormComponent";
 import "./css/ModalComponent.css"; 
 
 class ModalForm extends React.Component {
-   
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            match: this.props.match
+        }
+
+        this.updateModalMatch = this.updateModalMatch.bind(this)
+    }
+
+    updateModalMatch(match) {
+        this.setState({
+            match: match
+        })
+    }
+
+    componentWillReceiveProps(props) {
+        this.setState({
+            match: props.match
+        })
+    }
+
   render() {
     let modalHeader = ''
     let modalBody = ''
-    let goals1 = ''
-    let goals2 = ''
+    let goals1= ''
+    let goals2= ''
     let comments = ''
     let color = ''
     let og = ""
@@ -17,98 +39,86 @@ class ModalForm extends React.Component {
     let p = ""
 
     let alt = "Profile pic."
-  
-    if (typeof this.props.match.team1 !== 'undefined') {
-        goals1 = this.props.match.goals1.map((goal) => {
 
-          if (goal.owngoal) { 
-            color = "orange" 
-            p = ""
-            og = "(OG)"
-            brc = color
-          }
-          else if (goal.penalty) { 
-            color = "black" 
-            og = ""
-            p = "(P)"
-            brc = ""
-          }
-          else { 
-            color = "black" 
-            p = ""
-            og = ""
-            brc = ""
-          }
+      if (typeof this.state.match.team1 !== 'undefined') {
+        goals1 = this.state.match.goals1.map((goal, key) => {
+            if (goal.owngoal) {
+                color = "orange"
+                p = ""
+                og = "(OG)"
+                brc = color
+            }
+            else if (goal.penalty) {
+                color = "black"
+                og = ""
+                p = "(P)"
+                brc = ""
+            }
+            else {
+                color = "black"
+                p = ""
+                og = ""
+                brc = ""
+            }
 
-
-          return (
-            <div>
-                <img className={'ballon'} src="/images/ballonFoot.png" alt={alt} style={{borderRadius: 10, backgroundColor: brc}}/> <span style={{color: color}}>{goal.name} - {goal.minute + "'" } <span style={{fontWeight: "bold"}}>{p}</span>{og}</span>
-            </div>  
+            return (
+                <div key={key}>
+                    <img className={'ballon'} src="/images/ballonFoot.png" alt={alt} style={{borderRadius: 10, backgroundColor: brc}}/> <span style={{color: color}}>{goal.name} - {goal.minute + "'" } <span style={{fontWeight: "bold"}}>{p}</span>{og}</span>
+                </div>
           )
         })
-        goals2 = this.props.match.goals2.map((goal) => {
-
-          if (goal.owngoal) { 
-            color = "orange" 
-            p = ""
-            og = "(OG)"
-            brc = color
-          }
-          else if (goal.penalty) { 
-            color = "black" 
-            og = ""
-            p = "(P)"
-            brc = ""
-          }
-          else { 
-            color = "black" 
-            p = ""
-            og = ""
-            brc = ""
-          }
+        goals2 = this.state.match.goals2.map((goal, key) => {
+            if (goal.owngoal) {
+                color = "orange"
+                p = ""
+                og = "(OG)"
+                brc = color
+            }
+            else if (goal.penalty) {
+                color = "black"
+                og = ""
+                p = "(P)"
+                brc = ""
+            }
+            else {
+                color = "black"
+                p = ""
+                og = ""
+                brc = ""
+            }
 
             return (
-              <div>
-                 <img className={'ballon'} src="/images/ballonFoot.png" alt={alt} style={{borderRadius: 10, backgroundColor: brc}}/> <span style={{color: color}}>{goal.name} - {goal.minute + "'" } <span style={{fontWeight: "bold"}}>{p}</span>{og}</span>
+              <div key={key}>
+                  <img className={'ballon'} src="/images/ballonFoot.png" alt={alt} style={{borderRadius: 10, backgroundColor: brc}}/> <span style={{color: color}}>{goal.name} - {goal.minute + "'" } <span style={{fontWeight: "bold"}}>{p}</span>{og}</span>
               </div>  
             )
           })
 
-          comments = this.props.match.comments.map((comment) => {
+          comments = this.state.match.comments.map((comment, key) => {
             return (
-              <div className="row commentaire">
-                <img className={'photoprofil'} src={ comment.user.image  } alt={alt}/> <div className="username col-1">{comment.user.username}</div> <div className="comment col-8">{comment.comment}</div> <div className="date col-1">{ new Date(comment.date).toLocaleDateString("fr-FR") }</div>
+              <div key={key}>
+                <img className={'photoprofil'} src={ comment.user.image  } alt="Photo profil"/> {comment.user.username} - {comment.comment} - { new Date(comment.date).toLocaleDateString("fr-FR") }
               </div>  
             )
           })
-        modalHeader = <ModalHeader>{ this.props.match.team1.name } - { this.props.match.team2.name } - { new Date(this.props.match.date).toLocaleDateString("fr-FR") }</ModalHeader>
+        modalHeader = <ModalHeader>{ this.state.match.team1.name } - { this.state.match.team2.name } - { new Date(this.state.match.date).toLocaleDateString("fr-FR") }</ModalHeader>
         modalBody = <ModalBody>
-            
            <div className="main container"> 
-                <div className="row main">
-                    <div className="col-4 dom">
+                <div className="row" style={{textAlign: "center"}}>
+                    <div className="col-4">
                         { goals1 } 
                     </div>
-                    
-                    <div className="col-4 score">
-                        { this.props.match.score1 } - { this.props.match.score2 }
-                    </div> 
-                    
-                    <div className="col-4 ext">
+                    <div className="col-4">
+                        { this.state.match.score1 } - { this.state.match.score2 }
+                    </div>
+                    <div className="col-4">
                         { goals2 } 
                     </div>
                 </div>
             </div>
-           
-            <Form/>
-
+            <Form match={this.state.match} round={this.props.round} year={this.props.year} updateModalMatch={this.updateModalMatch}/>
              { comments }
-            
-            
         </ModalBody>
-         
-        
     }
 
     return (
