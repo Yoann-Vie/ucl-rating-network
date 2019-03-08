@@ -1,9 +1,8 @@
 import React from 'react';
 import "./css/MatchComponent.css"; 
-import { TabContent, TabPane, Nav, NavItem, NavLink, Card, CardTitle, Row, Col, Table} from 'reactstrap';
+import { TabContent, TabPane, Nav, NavItem, NavLink, Card, CardTitle, Col, Table} from 'reactstrap';
 import classnames from 'classnames';
 import Modal from "./ModalComponent";
-import Form from "./FormComponent";
 import HeaderComponent from './HeaderComponent';
 import fetchData from "../functions/fetchFunction";
 
