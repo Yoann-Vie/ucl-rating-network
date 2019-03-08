@@ -5,7 +5,7 @@ import Match from "./components/MatchComponent";
 
 const Page404 = ({ location }) => (
   <div>
-     <h2 style={{marginTop: 70}}>Eh non la route n'est pas bonne !</h2>
+     <h2 style={{color: 'white', padding: '40px 0 0 0' }}>Eh non la route n'est pas bonne !</h2>
      <div>
        <img style={{marginTop: 70}} src="/images/logos/lukaku.png" className="App-logo" alt="lukaku" />
      </div>

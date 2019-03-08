@@ -20,13 +20,18 @@
     padding: 0 10px;
 }
 .games{
-    margin-top: 80px;
+    margin-top: 35px;
 }
 
 .nav-tabs{
     margin-left: 10%;
+    margin-right: 10%;
 }
 
 .card-body {
     margin-top: 20px;
+}
+
+.nav-item {
+    background-color: white;
 }

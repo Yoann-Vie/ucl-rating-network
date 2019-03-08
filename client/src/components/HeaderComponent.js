@@ -65,38 +65,40 @@ class Home extends Component {
     }
 
     render() {
-
-        var content = "";
+        var content = ''
 
         if(this.state.isLogged === true){
             content = <div className="displayInlineBlock loginP">
-                <div className="displayInlineBlock">
-                    <Button onClick={this.toggleOff} color="primary">Logout</Button>
-                </div>        
                 <div className="profileTop displayInlineBlock">
                     <p>{this.state.loggedName}</p>
-                    <img src={this.state.pictureUrl} alt="profilePic" className="profilePic"/>
-                </div> 
+                </div>
+                <img src={this.state.pictureUrl} alt="profilePic" className="profilePic"/>
+                <div className="displayInlineBlock">
+                    <Button onClick={this.toggleOff} color="primary">Logout</Button>
+                </div>
             </div>
         }
         else{
-            content = <Button color="primary" onClick={this.toggle} className="loginBtn">Login</Button>
-
+            content = <div className="displayInlineBlock loginP">
+                <Button color="primary" onClick={this.toggle} className="loginBtn">Login</Button>
+            </div>
         }
 
         return (
-            <div className="header container">
+            <div className="header">
                 <div className="row" style={{maxHeight: "100%"}}>
-                    <div className="col-7" style={{maxHeight: "100%"}}>
-                        <img src="/images/logos/logo.png" className="logo" alt="logo" />
-                    </div>
                     <div className="col-5" style={{maxHeight: "100%"}}>
-                        {content}
+                        <Link to="/" className={'link-no-style'}>
+                            <img src="/images/logos/logo.png" className="logo" alt="logo" />
+                        </Link>
+                    </div>
+                    <div className="col-7 user-menu" style={{maxHeight: "100%"}}>
                         <div className="displayInlineBlock">
-                            <Button color="warning">
-                                <Link to="/Matchs">See Matches</Link>
-                            </Button>  
-                        </div>  
+                            <Button color="success">
+                                <Link to="/Matchs" className={'link-no-style'}>See Matches</Link>
+                            </Button>
+                        </div>
+                        {content}
                     </div>
                 </div>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
@@ -105,7 +107,7 @@ class Home extends Component {
                     </ModalBody>
                 </Modal>
             </div>
-        );
+        )
     }
 }
   
